@@ -1,8 +1,9 @@
 const Chapters = require('../database/models/chapters.model');
+const { getAllChapters, postOneChapter } = require('../queries/chapter.queries'); 
 
-exports.getAllChapters = async (req, res) => {
+exports.chaptersList = async (req, res) => {
     try {
-        const allChapters = await Chapters.find().exec();
+        const allChapters = await getAllChapters();
         res.json(allChapters)
         
     } catch(e) {
@@ -13,8 +14,7 @@ exports.getAllChapters = async (req, res) => {
 
  exports.createChapter = async (req, res) => {
      try {
-        const newChapter = new Chapters({...req.body});
-        const postChapter = await newChapter.save();
+        const postChapter = await postOneChapter(req.body);
         res.json(postChapter)  
      } catch(e) {
 
