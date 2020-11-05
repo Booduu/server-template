@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { chaptersList, createChapter } = require('../controllers/chapter.controller');
+const { listOfChapters, createChapter, oneChapter } = require('../controllers/chapter.controller');
 
-router.get('/', chaptersList);
-
+router.get('/', listOfChapters);
+router.get('/:chapterId', oneChapter)
 router.post('/', createChapter)
 
 

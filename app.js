@@ -19,6 +19,12 @@ const routing = require('./routes');
 
 app.use(routing);
 
+//gestion d'erreurs
+app.use((err, req, res, next) => {
+    console.error('ERROR !@#', err);
+    res.status(500).json(err.stack);
+})
+
 
 app.listen(3030, () => {
     console.log('listening on 3030')
