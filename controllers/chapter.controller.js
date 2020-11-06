@@ -3,7 +3,6 @@ const { getAllChapters, chapterCreate, getOneChapter } = require('../queries/cha
 
 exports.listOfChapters = async (req, res, next) => {
     try {
-        const error = req.test.email;
         const allChapters = await getAllChapters();
         res.json(allChapters)
     } catch(e) {
@@ -19,9 +18,9 @@ exports.listOfChapters = async (req, res, next) => {
 //         });
 //  }
 
-exports.oneChapter = async (req, res) => {
+exports.oneChapter = async (req, res, next) => {
     try {
-        const chapterId = req.params.chapterId;
+        const chapterId = req.params.chapterId; // -> créee une erreur pour test !
         const chapter = await getOneChapter(chapterId);
         res.json(chapter)
     } catch(e) {
@@ -29,7 +28,7 @@ exports.oneChapter = async (req, res) => {
     }
 }
 
- exports.createChapter = async (req, res) => {
+ exports.createChapter = async (req, res, next) => {
      try {
         const postChapter = await chapterCreate(req.body);
         res.json(postChapter)  

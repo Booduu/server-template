@@ -5,7 +5,7 @@ const schema = mongoose.Schema;
 
 const chapterSchema = schema({
     title: String ,
-    nbrOfLesson: { type: Number, required: true },
+    nbrOfLesson: { type: Number, required: [true, 'Champs requis'] },
     index: Number,
     active: Boolean,
 }, {

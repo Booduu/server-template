@@ -19,10 +19,25 @@ const routing = require('./routes');
 
 app.use(routing);
 
+
+
 //gestion d'erreurs
 app.use((err, req, res, next) => {
-    console.error('ERROR !@#', err);
-    res.status(500).json(err.stack);
+    // console.error('ERROR !@#', err);
+    // console.log(process.env.NODE_ENV);
+    const env = process.env.NODE_ENV;
+    if(env === 'production') {
+        res.status(500).json({
+            code: err.code || 500,
+            message: err.message
+        });
+    } else { 
+        res.status(500).json({
+            code: err.code || 500,
+            message: err.message,
+            stack: err.stack
+        });   
+    } 
 })
 
 
